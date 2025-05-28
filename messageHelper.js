@@ -4,11 +4,11 @@ require('dotenv').config();
 
 const listInteractiveObject = {
   type: 'list',
-  header: { type: 'text', text: 'Select a Shrimp Pot item to order' },
+  header: { type: 'text', text: 'Welcome To Shrimp Pot UAE!' },
   body: { text: 'Choose from our delicious menu' },
   footer: { text: 'All items are freshly prepared' },
   action: {
-    button: 'Order',
+    button: 'Browse Catalogue',
     sections: [
       {
         title: 'Shrimp Pot Menu',
