@@ -1,7 +1,7 @@
 // routes/index.js
 const express = require('express');
 const router = express.Router();
-const { sendInteractiveList } = require('../messageHelper');
+const { sendInteractiveList, sendMPCatalogue } = require('../messageHelper');
 const axios = require('axios');
 
 router.post('/webhook', async (req, res) => {
@@ -12,7 +12,7 @@ router.post('/webhook', async (req, res) => {
 
     if (message.type === 'text' && message.text?.body.toLowerCase() === 'menu') {
       try {
-        await sendInteractiveList(fromNumber, phoneNumberId);
+      await sendMPCatalogue(fromNumber);
       } catch (error) {
         console.error('Error sending interactive list:', error.message);
       }

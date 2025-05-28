@@ -23,6 +23,50 @@ const listInteractiveObject = {
   }
 };
 
+const productInteractiveObject = {
+  type: 'product_list', 
+  header: { type:'text', text: 'Our Featured Products' },
+  body: { text: 'Check out these great items!' }, 
+  action: { 
+      catalog_id:'672787999076814',
+      sections: [
+        {
+          title:'Main Collection',
+          product_items: [
+            { product_retailer_id : '5w2n3c7h5w' },
+            { product_retailer_id : 'qiav8duzuu' },
+          ]
+        }
+      ]
+   }
+};
+
+async function sendMPCatalogue(recipient){
+  const version = process.env.VERSION || 'v22.0'
+
+  const messageObject = {
+    messaging_product: 'whatsapp',
+    recipient_type: 'individual',
+    to: recipient,
+    type: 'interactive',
+    interactive:productInteractiveObject
+  }
+
+  try {
+    const response = await axios.post(
+      `https://graph.facebook.com/${process.env.VERSION}/${process.env.PHONE_NUMBER_ID}/messages`,
+      messageObject,
+      { headers: { Authorization: `Bearer ${process.env.ACCESS_TOKEN}` } }
+    );
+    console.log('Multi Product list sent successfully ✨:', JSON.stringify(response.data, null, 2));
+    return response;
+  } catch (error) {
+    console.error('Error sending multi product list ☄️:', JSON.stringify(error.response?.data, null, 2) || error.message);
+    throw error;
+  }
+
+}
+
 async function sendInteractiveList(recipient, phoneNumberId) {
   const messageObject = {
     messaging_product: 'whatsapp',
@@ -38,12 +82,13 @@ async function sendInteractiveList(recipient, phoneNumberId) {
       messageObject,
       { headers: { Authorization: `Bearer ${process.env.ACCESS_TOKEN}` } }
     );
-    console.log('Interactive list sent successfully:', JSON.stringify(response.data, null, 2));
+    console.log('Interactive list sent successfully ✨:', JSON.stringify(response.data, null, 2));
     return response;
   } catch (error) {
-    console.error('Error sending interactive list:', JSON.stringify(error.response?.data, null, 2) || error.message);
+    console.error('Error sending interactive list ☄️:', JSON.stringify(error.response?.data, null, 2) || error.message);
     throw error;
   }
 }
 
-module.exports = { sendInteractiveList };
+
+module.exports = { sendInteractiveList, sendMPCatalogue };
