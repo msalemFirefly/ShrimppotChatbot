@@ -1,10 +1,12 @@
 // messageHelper.js
+// create templates
+
 const axios = require('axios');
 require('dotenv').config();
 
 const listInteractiveObject = {
   type: 'list',
-  header: { type: 'text', text: 'Welcome To Shrimp Pot UAE!' },
+  header: { type: 'text', text: 'Welcome To Shrimp Pot UAE! 🦐 ' },
   body: { text: 'Choose from our delicious menu' },
   footer: { text: 'All items are freshly prepared' },
   action: {
