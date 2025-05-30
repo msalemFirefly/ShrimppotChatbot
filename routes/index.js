@@ -12,13 +12,36 @@ router.post('/webhook', async (req, res) => {
 
     if (message.type === 'text' && message.text?.body.toLowerCase() === 'menu') {
       try {
-      await sendMPCatalogue(fromNumber);
+      // TODO: add items to cart in database
+        await sendInteractiveList(fromNumber, phoneNumberId);
       } catch (error) {
         console.error('Error sending interactive list:', error.message);
       }
-    } else {
+    } 
+
+    else if (message.type === 'text' && message.text?.body.toLowerCase() === 'add more') {
       try {
-        await sendTextMessage(fromNumber, phoneNumberId, 'Please type "menu" to see our Shrimp Pot items.');
+        await sendInteractiveList(fromNumber, phoneNumberId);
+      // TODO: add items to cart in database
+      } catch (error) {
+        console.error('Error sending interactive list:', error.message);
+      }
+    }
+    
+    else if (message.type === 'text' && message.text?.body.toLowerCase() === 'checkout') {
+      try {
+        // TODO: add items to cart in database
+        await sendTextMessage(fromNumber, phoneNumberId, 'TODO: Generates a payment gateway.');
+      } catch (error) {
+        console.error('Error sending interactive list:', error.message);
+      }
+    }
+
+    else {
+      try {
+        //await sendTextMessage(fromNumber, phoneNumberId, 'Please type "menu" to see our Shrimp Pot items.');
+        // TODO: Do you want to add more? / Payment Gateway
+        await sendTextMessage(fromNumber, phoneNumberId, 'Would you like add more items to your cart or procceed to checkout?\n Type "add more" / "checkout".');
       } catch (error) {
         console.error('Error sending text message:', error.message);
       }

@@ -28,7 +28,7 @@ const productInteractiveObject = {
   header: { type:'text', text: 'Our Featured Products' },
   body: { text: 'Check out these great items!' }, 
   action: { 
-      catalog_id:'672787999076814',
+      catalog_id:process.env.CATALOGUE_ID,
       sections: [
         {
           title:'Main Collection',
@@ -91,4 +91,4 @@ async function sendInteractiveList(recipient, phoneNumberId) {
 }
 
 
-module.exports = { sendInteractiveList, sendMPCatalogue };
+module.exports = { sendInteractiveList };
